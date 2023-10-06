@@ -61,6 +61,8 @@ http://127.0.0.1:3000/?price=100
 Api
 
 ```sh
+# Api doc
+http://127.0.0.1:3000/api-doc
 # multiples gets by api
 http://127.0.0.1:3000/api/ads?tag=mobile&option=false&name=ip&price=50-&start=0&limit=2&sort=price
 # res
