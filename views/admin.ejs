@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NodePop - Admin Interface</title>
+   
+    <a href="/admin/logout">Logout</a>
+    
+    <style>
+        .form-item {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>NodePop - Admin Interface</h1>
+
+    <form action="/admin/add-ad" method="post" enctype="multipart/form-data">
+        <div class="form-item">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-item">
+            <label>Option:</label>
+            <div>
+                <input type="radio" id="venta" name="option" value="true" required>
+                <label for="venta">Sell</label>
+            </div>
+            <div>
+                <input type="radio" id="busqueda" name="option" value="false" required>
+                <label for="busqueda">Search</label>
+            </div>
+        </div>
+
+        <div class="form-item">
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" required>
+        </div>
+
+        <div class="form-item">
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+        </div>
+
+        <div class="form-item">
+            <label for="tags">Tags (separate by comma):</label>
+            <input type="text" id="tags" name="tags" required>
+        </div>
+
+        <div class="form-item">
+            <button type="submit">Upload Ad</button>
+        </div>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Option</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Tags</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% ads.forEach(ad => { %>
+                <tr>
+                    <td><%= ad.name %></td>
+                    <td><%= ad.option ? 'Sell' : 'Search' %></td>
+                    <td><%= ad.price %></td>
+                    <td><img src="/images/<%= ad.img %>" alt="Image" width="100"></td>
+                    <td><%= ad.tags.join(', ') %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>
