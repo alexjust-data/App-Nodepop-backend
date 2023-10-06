@@ -1,0 +1,144 @@
+{
+  "anuncios": [
+    {
+      "name": "Bicicleta",
+      "option": true,
+      "price": 230.15,
+      "img": "1.png",
+      "tags": ["lifestyle", "motor"]
+    },
+    {
+      "name": "iPhone 3GS",
+      "option": false,
+      "price": 50.00,
+      "img": "2.png",
+      "tags": ["lifestyle", "mobile"]
+    },
+    {
+      "name": "Portátil HP",
+      "option": true,
+      "price": 599.99,
+      "img": "3.png",
+      "tags": ["work", "mobile"]
+    },
+    {
+      "name": "Casco de Moto",
+      "option": true,
+      "price": 75.50,
+      "img": "4.png",
+      "tags": ["motor"]
+    },
+    {
+      "name": "iPad Pro",
+      "option": true,
+      "price": 799.00,
+      "img": "5.png",
+      "tags": ["mobile"]
+    },
+    {
+      "name": "Camiseta Adidas",
+      "option": true,
+      "price": 25.99,
+      "img": "6.png",
+      "tags": ["lifestyle"]
+    },
+    {
+      "name": "Coche Deportivo",
+      "option": true,
+      "price": 50000.00,
+      "img": "7.png",
+      "tags": ["motor"]
+    },
+    {
+      "name": "Escritorio de Oficina",
+      "option": true,
+      "price": 199.00,
+      "img": "8.png",
+      "tags": ["work"]
+    },
+    {
+      "name": "Zapatillas Nike",
+      "option": true,
+      "price": 79.95,
+      "img": "9.png",
+      "tags": ["lifestyle"]
+    },
+    {
+      "name": "Teléfono Samsung",
+      "option": true,
+      "price": 349.99,
+      "img": "10.png",
+      "tags": ["mobile"]
+    },
+    {
+      "name": "Motocicleta Harley-Davidson",
+      "option": true,
+      "price": 15000.00,
+      "img": "11.png",
+      "tags": ["motor"]
+    },
+    {
+      "name": "Mesa de Escritorio",
+      "option": true,
+      "price": 79.00,
+      "img": "12.png",
+      "tags": ["work"]
+    },
+    {
+      "name": "Gafas de Sol Ray-Ban",
+      "option": true,
+      "price": 129.99,
+      "img": "13.png",
+      "tags": ["lifestyle"]
+    },
+    {
+      "name": "Portátil Dell",
+      "option": true,
+      "price": 899.99,
+      "img": "14.png",
+      "tags": ["work", "mobile"]
+    },
+    {
+      "name": "Cascos de Moto",
+      "option": true,
+      "price": 45.00,
+      "img": "15.png",
+      "tags": ["motor"]
+    },
+    {
+      "name": "Bolsa de Viaje",
+      "option": true,
+      "price": 49.99,
+      "img": "16.png",
+      "tags": ["lifestyle"]
+    },
+    {
+      "name": "Reloj Casio",
+      "option": true,
+      "price": 39.95,
+      "img": "17.png",
+      "tags": ["lifestyle"]
+    },
+    {
+      "name": "Tablet Huawei",
+      "option": true,
+      "price": 249.00,
+      "img": "18.png",
+      "tags": ["mobile"]
+    },
+    {
+      "name": "Moto Yamaha",
+      "option": true,
+      "price": 7500.00,
+      "img": "19.png",
+      "tags": ["motor"]
+    },
+    {
+      "name": "Silla de Oficina",
+      "option": true,
+      "price": 149.00,
+      "img": "20.png",
+      "tags": ["work"]
+    }
+  ]
+}
