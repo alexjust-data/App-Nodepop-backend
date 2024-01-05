@@ -1,33 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Interfaz de administración</title>
-</head>
-<body>
-    <h1>NodePop</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Opción</th>
-                <th>Precio</th>
-                <th>Foto</th>
-                <th>Tags</th>
-                <!-- <pre><%= JSON.stringify(ads, null, 2) %></pre> -->
+<%- include('cabecera') %>
 
-            </tr>
-        </thead>
-        <tbody>
+    <main class="main-container">
+        <h1 class="text-center mb-4">Novedades</h1>
+        <div class="cards-container">
             <% ads.forEach(ad => { %>
-                <tr>
-                    <td><%= ad.name %></td>
-                    <td><%= ad.option ? 'Sell' : 'Search' %></td>
-                    <td><%= ad.price %></td>
-                    <td><img src="/images/<%= ad.img %>" alt="Foto" width="100"></td>
-                    <td><%= ad.tags.join(', ') %></td>
-                </tr>
+                <div class="card">
+                    <img src="/images/<%= ad.img %>" class="card-img" alt="<%= ad.name %>">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= ad.name %></h5>
+                        <p class="card-text"><%= ad.option ? 'Venta' : 'Búsqueda' %>: <%= ad.price %> EUR</p>
+                        <p class="card-text"><small class="text-muted">Tags: <%= ad.tags.join(', ') %></small></p>
+                    </div>
+                </div>
             <% }); %>
-        </tbody>
-    </table>
-</body>
-</html>
+        </div>
+    </main>
+
+<%- include('pie.ejs') %>
+
+
+
+
+

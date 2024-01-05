@@ -99,4 +99,19 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// POST /api/ads/
+// Ruta para crear un nuevo anuncio
+router.post('/', async (req, res, next) => {
+  try {
+    // Crear un nuevo anuncio con la información del cuerpo de la solicitud (req.body)
+    let ad = new Ad(req.body);
+    // Guardar el anuncio en la base de datos
+    ad = await ad.save();
+    // Responder con el anuncio creado
+    res.status(201).json({ result: ad });
+  } catch (error) {
+    next(error); // Enviar al manejador de errores
+  }
+});
+
 module.exports = router

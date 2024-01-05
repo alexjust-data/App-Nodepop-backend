@@ -1,0 +1,21 @@
+{
+	"Welcome to": "Bienvenido a",
+	"CABECERA": "CABECERA",
+	"Condicionales": "Condicionales",
+	"Bucles": "Bucles",
+	"i18n example for plurals": "i18n example for plurals",
+	"Mouse": {
+		"one": "Ratón",
+		"other": "Ratones"
+	},
+	"Hola": "Hola",
+	"Enter a new age of web design": "Entra en una nueva era de diseño web",
+	"Features": "Características",
+	"Download": "Descargar",
+	"Login": "Acceso",
+	"Private zone": "Private zone",
+	"Invalid credentials": "Invalid credentials",
+	"Private area": "Private area",
+	"Logout": "Logout",
+	"New agent": "New agent"
+}
