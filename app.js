@@ -16,7 +16,8 @@ const i18n = require('./lib/i18nConfigure');
 const AgentesController = require('./controllers/AgentesController');
 const LoginControllers = require('./controllers/LoginControllers');
 const PrivadoController = require('./controllers/PrivadoController');
-const adsRoutes = require('./routes/api/ads'); // Asegúrate de que la ruta al archivo sea correcta
+const adsController = require('./controllers/AdsController');
+const adsRoutes = require('./routes/api/ads');
 
 
 // Conexión a la base de datos
@@ -79,6 +80,10 @@ app.get('/privado', sessionAuthMiddleware, privadoController.index);
 app.get('/agentes-new', sessionAuthMiddleware, agentesController.new);
 app.post('/agentes-new', sessionAuthMiddleware, agentesController.postNewAgent);
 app.get('/agentes-delete/:agenteId', sessionAuthMiddleware, agentesController.deleteAgent)
+app.get('/ads-new', sessionAuthMiddleware, (req, res) => {
+  res.render('ads-new');
+});
+
 
 // Rutas de la API
 app.use('/api-doc', swaggerMiddleware);
