@@ -33,6 +33,7 @@ async function initAds () {
   try {
     // create initial ads
     const adsToInsert = initData.anuncios.map(ad => ({
+      owner: ad.owner,
       name: ad.name,
       option: ad.option,
       price: ad.price,

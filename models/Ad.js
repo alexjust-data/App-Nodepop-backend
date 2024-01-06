@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
 const adSchema = new mongoose.Schema({
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario' },
   name: String,
   option: Boolean, // true: se vende, false: se busca
   price: Number,

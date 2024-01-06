@@ -1,22 +1,29 @@
 <%- include('cabecera') %>
 
-    <main class="main-container">
-        <h1 class="text-center mb-4">Novedades</h1>
-        <div class="cards-container">
-            <% ads.forEach(ad => { %>
-                <div class="card">
-                    <img src="/images/<%= ad.img %>" class="card-img" alt="<%= ad.name %>">
-                    <div class="card-body">
-                        <h5 class="card-title"><%= ad.name %></h5>
-                        <p class="card-text"><%= ad.option ? 'Venta' : 'Búsqueda' %>: <%= ad.price %> EUR</p>
-                        <p class="card-text"><small class="text-muted">Tags: <%= ad.tags.join(', ') %></small></p>
+        <main class="main-container">
+            <h1 class="text-center mb-4">Novedades</h1>
+            <div class="cards-container">
+                <% ads.forEach(ad => { %>
+                    <div class="card">
+                        <img src="/images/<%= ad.img %>" class="card-img" alt="<%= ad.name %>">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= ad.name %></h5>
+                            <p class="card-text"><%= ad.option ? 'Venta' : 'Búsqueda' %>: <%= ad.price %> EUR</p>
+                            <% if (ad.owner) { %>
+                                <p class="card-text"><small class="text-muted">Creado por: <%= ad.owner.email %></small></p>
+                            <% } else { %>
+                                <p class="card-text"><small class="text-muted">Creado por: Desconocido</small></p>
+                            <% } %>
+                            <p class="card-text"><small class="text-muted">Tags: <%= ad.tags.join(', ') %></small></p>
+                        </div>
                     </div>
-                </div>
-            <% }); %>
-        </div>
-    </main>
+                <% }); %>
+            </div>
+        </main>
 
 <%- include('pie.ejs') %>
+
+
 
 
 

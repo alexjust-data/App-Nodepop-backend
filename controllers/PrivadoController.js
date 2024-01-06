@@ -1,4 +1,4 @@
-const { Agente, Usuario } = require('../models');
+const { Agente, Usuario, Ad } = require('../models');
 const createError = require('http-errors');
 
 class PrivadoController {
@@ -20,10 +20,17 @@ class PrivadoController {
 
       // cargar lista de agentes que pertenecen al usuario
       const agentes = await Agente.find({ owner: usuarioId });
+      console.log('agentes :', agentes);
+
+      // cargar lista de anuncios que pertenecen al usuario
+      console.log('cargar lista de anuncios : ', Ad.find({ owner: usuarioId }));
+      const ads = await Ad.find({ owner: usuarioId }); 
+      console.log('lista de anuncios : ', ads);
 
       res.render('privado', {
         email: usuario.email,
-        agentes
+        agentes,
+        ads 
       });
 
     } catch (err) {

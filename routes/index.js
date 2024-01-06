@@ -47,7 +47,14 @@ router.get('/', async (req, res, next) => {
       }
     }
 
-    const ads = await Ad.lista(filter, skip, limit, sort, fields)
+    // const ads = await Ad.lista(filter, skip, limit, sort, fields)
+    const ads = await Ad.find(filter)
+      .populate('owner', 'email') // Añade los detalles que necesites del usuario
+      .skip(skip)
+      .limit(limit)
+      .sort(sort)
+      .select(fields);
+
 
     if (req.originalUrl.startsWith('/api/')) {
       // If the request comes from the API, respond with JSON
