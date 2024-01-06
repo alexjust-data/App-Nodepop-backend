@@ -16,7 +16,6 @@ const i18n = require('./lib/i18nConfigure');
 const AgentesController = require('./controllers/AgentesController');
 const LoginControllers = require('./controllers/LoginControllers');
 const PrivadoController = require('./controllers/PrivadoController');
-const adsController = require('./controllers/AdsController');
 const adsRoutes = require('./routes/api/ads');
 
 

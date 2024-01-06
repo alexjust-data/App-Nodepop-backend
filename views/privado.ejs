@@ -1,80 +1,63 @@
 <% include cabecera.ejs %>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
   <!-- Basic features section-->
-    <section class="bg-light">
-        <div class="container px-5">
+  <section class="bg-light">
+    <div class="container px-5">
 
-            <div class="row gx-5 align-items-center justify-content-center justify-content-lg-between">
-                <div class="col-12 col-lg-5">
-                    <h2 class="display-4 lh-1 mb-4"><%= __('Private zone') %></h2>
-                </div>
-                <div class="col-12 col-lg-5">
-                    <p>User: <%= email %></p>
-                </div>
+        <div class="row gx-5 align-items-center justify-content-center justify-content-lg-between">
+            <div class="col-12 col-lg-5">
+                <h2 class="display-4 lh-1 mb-4"><%= __('Private zone') %></h2>
             </div>
+            <div class="col-12 col-lg-5">
+                <p>User: <%= email %></p>
+            </div>
+        </div>
 
-            <div class="row gx-5 align-items-center justify-content-center justify-content-lg-between">
-                <div class="col-12 col-lg-12">
-                    <table class="table">
-                        <thead>
+        <div class="row gx-5 align-items-center justify-content-center justify-content-lg-between">
+            <div class="col-12 col-lg-12">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col" style="width: 10%;">#</th>
+                        <th scope="col">Agent</th>
+                        <th scope="col" style="width: 10%;">Age</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% agentes.forEach( agente => { %>
                         <tr>
-                            <th scope="col" style="width: 10%;">#</th>
-                            <th scope="col">Agent</th>
-                            <th scope="col" style="width: 10%;">Age</th>
-                            <th scope="col" style="width: 10%;"><a href="/agentes-new">New agent</a></th>
+                            <th scope="row"><%= agente._id %></th>
+                            <td><%= agente.name %></td>
+                            <td><%= agente.age  %></td>
+                            <td><a
+                                onclick="confirmDeleteAgent('<%= agente.name %>', '<%= agente._id %>')"
+                                href="javascript:void(0);">
+                                    <i class="bi bi-trash"></i>
+                            </a></td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        <% agentes.forEach( agente => { %>
-                            <tr>
-                                <th scope="row"><%= agente._id %></th>
-                                <td><%= agente.name %></td>
-                                <td><%= agente.age  %></td>
-                                <td><a
-                                    onclick="confirmDeleteAgent('<%= agente.name %>', '<%= agente._id %>')"
-                                    href="javascript:void(0);">
-                                        <i class="bi bi-trash"></i>
-                                </a></td>
-                            </tr>
-                        <% }) %>
-                        </tbody>
-                    </table>
-                </div>
+                      <% }) %>
+                    </tbody>
+                  </table>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <script>
-        function confirmDeleteAgent(name, agenteId) {
-            if (confirm(`Estas seguro que quieres eliminar el agente ${name}?`)) {
-                window.location.href = `/agentes-delete/${agenteId}`;
-            }
+<script>
+    function confirmDeleteAgent(name, agenteId) {
+        if (confirm(`Estas seguro que quieres eliminar el agente ${name}?`)) {
+            window.location.href = `/agentes-delete/${agenteId}`;
         }
-    </script>
+    }
+</script>
 
-    <br></br>
-    <br></br>
+<br></br>
 
-    <section class="bg-light">
-        <div class="container px-5">
-        <a href="/ads-new" class="btn btn-primary">Crear nuevo anuncio</a>
-        <br></br>
-        <!-- Anuncios del usuario -->
-        <main class="main-container">
-            <h1 class="text-center mb-4">Tus Anuncios</h1>
-            <div class="cards-container">
-                <% ads.forEach(ad => { %>
-                    <div class="card">
-                        <img src="/images/<%= ad.img %>" class="card-img" alt="<%= ad.name %>">
-                        <div class="card-body">
-                            <h5 class="card-title"><%= ad.name %></h5>
-                            <p class="card-text"><%= ad.option ? 'Venta' : 'Búsqueda' %>: <%= ad.price %> EUR</p>
-                            <p class="card-text"><small class="text-muted">Tags: <%= ad.tags.join(', ') %></small></p>
-                        </div>
-                    </div>
-                <% }); %>
-            </div>
-        </main>
-        </div>
-    </section>
+<!-- Buttons -->
+<div class="d-flex justify-content-between mt-4">
+    <a href="/agentes-new" class="btn btn-primary">New agent</a>
+    <a href="/ads-new" class="btn btn-primary">Crear nuevo anuncio</a>
+</div>
 
 <% include pie.ejs %>
