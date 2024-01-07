@@ -6,7 +6,7 @@ const multer = require('multer') // upload img
 // Configure multer to upload images to a specific location
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/images') // Path where the images will be stored
+    cb(null, 'public/img') // Path where the images will be stored
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + file.originalname) // Unique filename
@@ -16,13 +16,13 @@ const storage = multer.diskStorage({
 const upload = multer({ storage })
 
 // Route to process the ad creation form
-router.post('/add-ad', upload.single('image'), async (req, res, next) => {
+router.post('/add-ad', upload.single('img'), async (req, res, next) => {
   try {
     const { name, option, price, tags } = req.body
-    const image = req.file.filename // Name of the uploaded image file
+    const img = req.file.filename // Name of the uploaded image file
 
     // Create a new ad in the database
-    const newAd = new Ad({ name, option, price, img: image, tags: tags.split(',') })
+    const newAd = new Ad({ name, option, price, img: img, tags: tags.split(',') })
     const savedAd = await newAd.save()
 
     // Render the main page view with the updated ads

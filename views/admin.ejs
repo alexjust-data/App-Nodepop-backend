@@ -38,8 +38,8 @@
         </div>
 
         <div class="form-item">
-            <label for="image">Image:</label>
-            <input type="file" id="image" name="image" accept="image/*" required>
+            <label for="img">Image:</label>
+            <input type="file" id="img" name="img" accept="img/*" required>
         </div>
 
         <div class="form-item">
@@ -68,7 +68,7 @@
                     <td><%= ad.name %></td>
                     <td><%= ad.option ? 'Sell' : 'Search' %></td>
                     <td><%= ad.price %></td>
-                    <td><img src="/images/<%= ad.img %>" alt="Image" width="100"></td>
+                    <td><img src="/img/<%= ad.img %>" alt="Image" width="100"></td>
                     <td><%= ad.tags.join(', ') %></td>
                 </tr>
             <% }); %>

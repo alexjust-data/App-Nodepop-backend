@@ -4,9 +4,8 @@ require('dotenv').config();
 
 const readLine = require('node:readline')
 const connection = require('./lib/connectMongoose') // conect to database
-const Ad = require('./models/Ad') // load the model
-const { Agente, Usuario } = require('./models');
-const initData = require('./ads.json') // load files with intial data
+const { Agente, Usuario, Ad } = require('./models');
+//const initData = require('./ads.json') // load files with intial data
 
 main().catch(err => console.log('There was a mistake --> ', err))
 
@@ -20,43 +19,23 @@ async function main () {
   )
   if (!borrar) { process.exit() }
 
-  await initAds() // initialize the ad collection, defined below
   await initUsuarios(); // inicializar la colección de usuarios
   await initAgentes();
+  await initAds() // initialize the ad collection, defined below
   connection.close()
 }
 
-async function initAds () {
-  const deleted = await Ad.deleteMany() // delete all documents from the Ad collection
-  console.log(`Eliminates ${deleted.deletedCount} ads.`)
-
-  try {
-    // create initial ads
-    const adsToInsert = initData.anuncios.map(ad => ({
-      owner: ad.owner,
-      name: ad.name,
-      option: ad.option,
-      price: ad.price,
-      img: ad.img,
-      tags: ad.tags
-    }))
-    const inserted = await Ad.insertMany(adsToInsert)
-    console.log(`Creates ${inserted.length} ads.`)
-  } catch (error) {
-    console.log('Error loading ads:', error)
-  }
-}
 
 async function initAgentes() {
   // borrar todos los documentos de la colección de agentes
   const deleted = await Agente.deleteMany();
   console.log(`Eliminados ${deleted.deletedCount} agentes.`);
-
+  
   const [ adminUser, usuario1User ] = await Promise.all([
     Usuario.findOne({ email: 'admin@example.com'}),
     Usuario.findOne({ email: 'usuario1@example.com' })
   ])
-
+  
   // crear agentes iniciales
   const inserted = await Agente.insertMany([
     { "name": "Smith", "age": 33, owner: adminUser._id },
@@ -65,6 +44,7 @@ async function initAgentes() {
   ]);
   console.log(`Creados ${inserted.length} agentes.`);
 }
+
 
 // define function
 async function initUsuarios() {
@@ -80,6 +60,49 @@ async function initUsuarios() {
   ]);
   console.log(`Creados ${inserted.length} usuarios.`)
 }
+
+
+async function initAds () {
+  const deleted = await Ad.deleteMany() // delete all documents from the Ad collection
+  console.log(`Eliminates ---> ${deleted.deletedCount} ads.`)
+
+  const [ adminUser, usuario1User ] = await Promise.all([
+    Usuario.findOne({ email: 'admin@example.com'}),
+    Usuario.findOne({ email: 'usuario1@example.com' })
+  ])
+
+  // crear ads iniciales
+  const Adinserted = await Ad.insertMany([
+    { 
+      "name": "Bicicleta", 
+      "option": true, 
+      "price": 230.15, 
+      "img": "1.png", 
+      "tags": ["lifestyle", "motor"],
+      owner: adminUser._id
+    },
+    { 
+      "name": "iPhone 3GS",
+      "option": false,
+      "price": 50.00,
+      "img": "2.png",
+      "tags": ["lifestyle", "mobile"],
+      owner: adminUser._id
+    },
+    { 
+      "name": "Portátil HP",
+      "option": true,
+      "price": 599.99,
+      "img": "3.png",
+      "tags": ["work", "mobile"],
+      owner: usuario1User._id
+    }
+  ]);
+  console.log(`Creados ${Adinserted.length} anuncios.`);
+
+}
+
+
 
 /**
   'scripts': {

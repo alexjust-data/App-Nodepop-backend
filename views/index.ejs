@@ -5,7 +5,7 @@
         <div class="cards-container">
             <% ads.forEach(ad => { %>
                 <div class="card">
-                    <img src="/images/<%= ad.img %>" class="card-img" alt="<%= ad.name %>">
+                    <img src="/img/<%= ad.img %>" class="card-img" alt="<%= ad.name %>">
                     <div class="card-body">
                         <h5 class="card-title"><%= ad.name %></h5>
                         <p class="card-text"><%= ad.option ? 'Venta' : 'Búsqueda' %>: <%= ad.price %> EUR</p>

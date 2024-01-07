@@ -23,7 +23,6 @@ class PrivadoController {
       console.log('agentes :', agentes);
 
       // cargar lista de anuncios que pertenecen al usuario
-      console.log('cargar lista de anuncios : ', Ad.find({ owner: usuarioId }));
       const ads = await Ad.find({ owner: usuarioId }); 
       console.log('lista de anuncios : ', ads);
 

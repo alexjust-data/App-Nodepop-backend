@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const MongoStore = require('connect-mongo');
 const session = require('express-session');
+const upload = require('./lib/uploadConfigure');
 
 // Importación de middleware y controladores
 const swaggerMiddleware = require('./lib/swaggerMiddleware');
@@ -16,6 +17,7 @@ const i18n = require('./lib/i18nConfigure');
 const AgentesController = require('./controllers/AgentesController');
 const LoginControllers = require('./controllers/LoginControllers');
 const PrivadoController = require('./controllers/PrivadoController');
+const AdsControllers = require('./controllers/AdsController');
 const adsRoutes = require('./routes/api/ads');
 
 
@@ -67,8 +69,9 @@ app.use('/change-locale', require('./routes/change-locale'));
 
 // Rutas del website
 const privadoController = new PrivadoController();
-const agentesController = new AgentesController();
 const loginController = new LoginControllers();
+const agentesController = new AgentesController();
+const adsController = new AdsControllers();
 
 app.get('/login', loginController.index);
 app.post('/login', loginController.post);
@@ -76,12 +79,15 @@ app.get('/logout', loginController.logout);
 
 // Rutas del website : Zona privada del usuario
 app.get('/privado', sessionAuthMiddleware, privadoController.index);
+
 app.get('/agentes-new', sessionAuthMiddleware, agentesController.new);
 app.post('/agentes-new', sessionAuthMiddleware, agentesController.postNewAgent);
 app.get('/agentes-delete/:agenteId', sessionAuthMiddleware, agentesController.deleteAgent)
-app.get('/ads-new', sessionAuthMiddleware, (req, res) => {
-  res.render('ads-new');
-});
+
+app.get('/ad-new', sessionAuthMiddleware, adsController.new); // Para mostrar la página de creación de anuncios
+app.post('/ad-new', sessionAuthMiddleware, upload.single('img'), adsController.postNewAd); // Para manejar la publicación de un nuevo anuncio
+app.get('/ads-delete/:adId', sessionAuthMiddleware, adsController.deleteAd);
+
 
 
 // Rutas de la API
