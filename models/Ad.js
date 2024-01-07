@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 
 const adSchema = new mongoose.Schema({
-  owner: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario' },
   name: String,
   option: Boolean, // true: se vende, false: se busca
   price: Number,
   img: String,
-  tags: [String]
+  tags: [String],
+  owner: { ref: 'Usuario', type: mongoose.Schema.Types.ObjectId }
 })
 
 // método ESTATICO

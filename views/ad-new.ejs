@@ -5,7 +5,7 @@
   <div class="login-container">
     <div class="login-content">
       <h2>Crear Nuevo Anuncio</h2>
-      <form action="/api/ads" method="post" enctype="multipart/form-data">
+      <form action="/ad-new" method="post" enctype="multipart/form-data">
         <div class="form-group">
           <label for="name">Nombre:</label>
           <input type="text" id="name" name="name" class="form-control" required>
@@ -26,8 +26,8 @@
           <input type="text" id="tags" name="tags" class="form-control" placeholder="Ej: lifestyle,motor">
         </div>
         <div class="form-group">
-          <label for="image">Imagen:</label>
-          <input type="file" id="image" name="image" class="form-control-file" required>
+          <label for="img">Imagen:</label>
+          <input type="file" id="img" name="img" class="form-control-file" required>
         </div>
         <button type="submit" class="btn btn-primary btn-login">Crear Anuncio</button>
       </form>

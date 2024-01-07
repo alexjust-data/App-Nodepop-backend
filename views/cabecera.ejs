@@ -12,11 +12,20 @@
             <a class="navbar-brand" href="/">NodePop</a>
             <% if (!session.usuarioLogado) { %>
                 <a href="/login" class="btn btn-primary rounded-pill">
-                    Iniciar sesión
+                    <span class="d-flex align-items-center">
+                        <span class="small"><%= __('Login') %></span>
+                    </span>
                 </a>
             <% } else  { %>
                 <a href="/logout" class="btn btn-primary rounded-pill">
-                    Cerrar sesión
+                    <span class="d-flex align-items-center">
+                        <span class="small"><%= __('Logout') %></span>
+                    </span>
+                </a>
+                <a href="/privado" class="btn btn-primary rounded-pill">
+                    <span class="d-flex align-items-center">
+                        <span class="small"><%= __('Private area') %></span>
+                    </span>
                 </a>
             <% } %>
         </div>

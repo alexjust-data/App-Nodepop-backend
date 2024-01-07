@@ -57,7 +57,39 @@
 <!-- Buttons -->
 <div class="d-flex justify-content-between mt-4">
     <a href="/agentes-new" class="btn btn-primary">New agent</a>
-    <a href="/ads-new" class="btn btn-primary">Crear nuevo anuncio</a>
 </div>
+
+<!-- Ads area -->
+
+<!-- Cards de Anuncios con opción de eliminar -->
+<main class="main-container">
+    <div class="header-container" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2 class="text-center mb-0">Tus anuncios</h2>
+        <a href="/ad-new" class="btn btn-primary">Crear nuevo anuncio</a>
+    </div>
+    <div class="cards-container">
+        <% ads.forEach(ad => { %>
+            <div class="card">
+                <img src="/img/<%= ad.img %>" class="card-img" alt="<%= ad.name %>">
+                <div class="card-body">
+                    <h5 class="card-title"><%= ad.name %></h5>
+                    <p class="card-text"><%= ad.option ? 'Venta' : 'Búsqueda' %>: <%= ad.price %> EUR</p>
+                    <p class="card-text"><small class="text-muted">Tags: <%= ad.tags.join(', ') %></small></p>
+                    <a onclick="confirmDeleteAd('<%= ad.name %>', '<%= ad._id %>')" href="javascript:void(0);">
+                        <i class="bi bi-trash"></i> Eliminar Anuncio
+                    </a>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</main>
+
+<script>
+    function confirmDeleteAd(name, adId) {
+        if (confirm(`Estas seguro que quieres eliminar el anuncio ${name}?`)) {
+            window.location.href = `/ads-delete/${adId}`;
+        }
+    }
+</script>
 
 <% include pie.ejs %>
