@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Meta tags, iconos, fuentes y CSS como en tu código actual -->
+    <!-- Tus otros meta tags, iconos, fuentes y CSS -->
     <link href="css/styles.css" rel="stylesheet" /> <!-- Bootstrap y otros estilos -->
+    <style>
+        .botones-navbar {
+            display: flex;
+            align-items: center;
+        }
+    </style>
 </head>
 <body id="page-top">
     <!-- Navigation -->
@@ -11,22 +17,26 @@
         <div class="container-custom">
             <a class="navbar-brand" href="/">NodePop</a>
             <% if (!session.usuarioLogado) { %>
-                <a href="/login" class="btn btn-primary rounded-pill">
-                    <span class="d-flex align-items-center">
-                        <span class="small"><%= __('Login') %></span>
-                    </span>
-                </a>
+                <div class="botones-navbar">
+                    <a href="/login" class="btn btn-primary rounded-pill">
+                        <span class="d-flex align-items-center">
+                            <span class="small"><%= __('Login') %></span>
+                        </span>
+                    </a>
+                </div>
             <% } else  { %>
-                <a href="/logout" class="btn btn-primary rounded-pill">
-                    <span class="d-flex align-items-center">
-                        <span class="small"><%= __('Logout') %></span>
-                    </span>
-                </a>
-                <a href="/privado" class="btn btn-primary rounded-pill">
-                    <span class="d-flex align-items-center">
-                        <span class="small"><%= __('Private area') %></span>
-                    </span>
-                </a>
+                <div class="botones-navbar">
+                    <a href="/logout" class="btn btn-primary rounded-pill">
+                        <span class="d-flex align-items-center">
+                            <span class="small"><%= __('Logout') %></span>
+                        </span>
+                    </a>
+                    <a href="/privado" class="btn btn-primary rounded-pill">
+                        <span class="d-flex align-items-center">
+                            <span class="small"><%= __('Private area') %></span>
+                        </span>
+                    </a>
+                </div>
             <% } %>
         </div>
     </nav>
