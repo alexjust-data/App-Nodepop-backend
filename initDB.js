@@ -66,7 +66,7 @@ async function initAds () {
       "price": 50.00,
       "img": "2.png",
       "tags": ["lifestyle", "mobile"],
-      oowner: usuario1User._id
+      owner: usuario1User._id
     },
     { 
       "name": "Portátil HP",

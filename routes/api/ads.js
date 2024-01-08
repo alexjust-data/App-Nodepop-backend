@@ -62,22 +62,35 @@ router.get('/:id', jwtAuthMiddleware, async (req, res, next) => {
 
 // POST /api/ads
 // Crea un nuevo anuncio
-router.post('/', upload.single('img'), async (req, res, next) => {
+router.post('/', jwtAuthMiddleware, upload.single('img'), async (req, res, next) => {
   try {
     let adData = req.body;
-
     console.log("adData ---> ", adData);  // ojo <---- quítalo luego
 
     const usuarioIdLogado = req.usuarioLogadoAPI;
-
     console.log("req.file ---> ", req.file); // ojo <---- quítalo luego
 
-    let ad = new Ad(adData);
-    ad.img = req.file.filename;
-    ad.owner = usuarioIdLogado;
+    // Verificar si el usuario está logueado
+    if (!usuarioIdLogado) {
+      return res.status(401).send('Usuario no autenticado');
+    }
+
+    // Crear el objeto del anuncio con los datos del formulario y la imagen subida
+    let ad = new Ad({
+      name: req.body.name,
+      option: req.body.option,
+      price: req.body.price,
+      tags: req.body.tags.split(','), // Asegúrate de que tags es un array
+      img: req.file.filename,
+      owner: usuarioIdLogado // Asignar el id del usuario logueado como owner
+    });
 
     // la persistimos en la BD
-    const adGuardado = await ad.save();
+    await ad.save();
+
+    // Ahora, poblamos el campo 'owner' antes de enviar la respuesta
+    // Ten en cuenta que necesitas reemplazar 'User' con el nombre de tu modelo de usuario real si es diferente.
+    const adGuardado = await Ad.findById(ad._id).populate('owner', 'email');
 
     res.json({ result: adGuardado });
 
