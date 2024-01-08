@@ -4,19 +4,19 @@
     <div class="login-background">
       <div class="login-container">
         <div class="login-content">
-          <h2>Compra y vende en NodePop</h2>
-          <p>Consigue los mejores precios y gana dinero con lo que no usas.</p>
+          <h2><%= __('Buy and sell on NodePop') %></h2>
+          <p><%= __("Get the best prices and earn money with what you don't use.") %></p>
     
           <form method="POST" class="login-form">
             <div class="form-group">
-              <label for="email">Email address</label>
+              <label for="email"><%= __('Email address') %></label>
               <input type="email" name="email" value="<%= email %>" id="email" required>
             </div>
             <div class="form-group">
-              <label for="password">Password</label>
+              <label for="password"><%= __('Password') %></label>
               <input type="password" name="password" id="password" required>
             </div>
-            <button type="submit" class="btn btn-login">Iniciar sesión</button>
+            <button type="submit" class="btn btn-login"><%= __('Log in') %></button>
             <p><%= error %></p>
           </form>
         </div>
