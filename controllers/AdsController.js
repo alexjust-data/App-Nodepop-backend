@@ -11,7 +11,6 @@ class AdsController {
             
             const { name, option, price, tags } = req.body;
             const img = req.file.filename; // Asumiendo que 'img' es el nombre del campo en el formulario
-            console.log("img ....>", img)
             const ad = new Ad({ name, option, price, tags, img, owner: usuarioId });
             await ad.save();
       
