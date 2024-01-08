@@ -9,6 +9,22 @@ body {
     height: 80px; /* Ajusta esto para que coincida con la altura de tu navbar */
 }
 
+/* Estiles del idioma */
+.navbar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.locale-switcher {
+    margin-left: 10px; /* Ajustar según sea necesario */
+}
+
+.locale-switcher a {
+    padding: 0 5px; /* Ajustar el espaciado entre enlaces de idioma */
+}
+
+
 /* Contenedor personalizado para alinear con el contenido principal */
 .container-custom {
     max-width: 1200px;

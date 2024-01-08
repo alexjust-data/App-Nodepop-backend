@@ -1,20 +1,21 @@
 <%- include('cabecera') %>
 
     <main class="main-container">
-        <h1 class="text-center mb-4">Novedades</h1>
+        <h1 class="text-center mb-4"><%= __('News') %></h1>
         <div class="cards-container">
             <% ads.forEach(ad => { %>
                 <div class="card">
                     <img src="/img/<%= ad.img %>" class="card-img" alt="<%= ad.name %>">
                     <div class="card-body">
                         <h5 class="card-title"><%= ad.name %></h5>
-                        <p class="card-text"><%= ad.option ? 'Venta' : 'Búsqueda' %>: <%= ad.price %> EUR</p>
-                        <p class="card-text"><small class="text-muted">Tags: <%= ad.tags.join(', ') %></small></p>
+                        <p class="card-text"><%= ad.option ? __('Venta') : __('Búsqueda') %>: <%= ad.price %> EUR</p>
+                        <p class="card-text"><small class="text-muted"><%= __('Tags') %>: <%= ad.tags.join(', ') %></small></p>
                     </div>
                 </div>
             <% }); %>
         </div>
     </main>
+
 
     <br></br>
     <br></br>
