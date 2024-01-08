@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const readLine = require('node:readline')
 const connection = require('./lib/connectMongoose') // conect to database
-const { Agente, Usuario, Ad } = require('./models');
+const { Usuario, Ad } = require('./models');
 //const initData = require('./ads.json') // load files with intial data
 
 main().catch(err => console.log('There was a mistake --> ', err))
@@ -20,29 +20,8 @@ async function main () {
   if (!borrar) { process.exit() }
 
   await initUsuarios(); // inicializar la colección de usuarios
-  await initAgentes();
   await initAds() // initialize the ad collection, defined below
   connection.close()
-}
-
-
-async function initAgentes() {
-  // borrar todos los documentos de la colección de agentes
-  const deleted = await Agente.deleteMany();
-  console.log(`Eliminados ${deleted.deletedCount} agentes.`);
-  
-  const [ adminUser, usuario1User ] = await Promise.all([
-    Usuario.findOne({ email: 'admin@example.com'}),
-    Usuario.findOne({ email: 'usuario1@example.com' })
-  ])
-  
-  // crear agentes iniciales
-  const inserted = await Agente.insertMany([
-    { "name": "Smith", "age": 33, owner: adminUser._id },
-    { "name": "Jones", "age": 23, owner: adminUser._id },
-    { "name": "Brown", "age": 46, owner: usuario1User._id }
-  ]);
-  console.log(`Creados ${inserted.length} agentes.`);
 }
 
 
@@ -79,7 +58,7 @@ async function initAds () {
       "price": 230.15, 
       "img": "1.png", 
       "tags": ["lifestyle", "motor"],
-      owner: adminUser._id
+      owner: usuario1User._id
     },
     { 
       "name": "iPhone 3GS",
@@ -87,7 +66,7 @@ async function initAds () {
       "price": 50.00,
       "img": "2.png",
       "tags": ["lifestyle", "mobile"],
-      owner: adminUser._id
+      oowner: usuario1User._id
     },
     { 
       "name": "Portátil HP",
@@ -96,6 +75,30 @@ async function initAds () {
       "img": "3.png",
       "tags": ["work", "mobile"],
       owner: usuario1User._id
+    },
+    { 
+      "name": "Caracol", 
+      "option": true, 
+      "price": 230.15, 
+      "img": "4.png", 
+      "tags": ["lifestyle"],
+      owner: adminUser._id
+    },
+    { 
+      "name": "Postal familiar",
+      "option": false,
+      "price": 50.00,
+      "img": "5.png",
+      "tags": ["lifestyle"],
+      owner: adminUser._id
+    },
+    { 
+      "name": "Postal familiar",
+      "option": true,
+      "price": 599.99,
+      "img": "6.jpeg",
+      "tags": ["work", "mobile"],
+      owner: adminUser._id
     }
   ]);
   console.log(`Creados ${Adinserted.length} anuncios.`);

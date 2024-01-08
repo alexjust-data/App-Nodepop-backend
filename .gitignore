@@ -3,5 +3,8 @@
 Thumbs.db
 
 # Build
-public/images/*
+public/img/*
+
+# env
+.env
 

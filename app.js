@@ -14,7 +14,6 @@ const basicAuthMiddleware = require('./lib/basicAuthMiddleware');
 const sessionAuthMiddleware = require('./lib/sessionAuthMiddleware');
 const jwtAuthMiddleware = require('./lib/jwtAuthMiddleware');
 const i18n = require('./lib/i18nConfigure');
-const AgentesController = require('./controllers/AgentesController');
 const LoginControllers = require('./controllers/LoginControllers');
 const PrivadoController = require('./controllers/PrivadoController');
 const AdsControllers = require('./controllers/AdsController');
@@ -24,9 +23,6 @@ const adsRoutes = require('./routes/api/ads');
 // Conexión a la base de datos
 require('./lib/connectMongoose');
 
-
-// Importación de modelos
-const Ad = require('./models/Ad');
 
 // Inicialización de la aplicación Express
 const app = express();
@@ -70,7 +66,6 @@ app.use('/change-locale', require('./routes/change-locale'));
 // Rutas del website
 const privadoController = new PrivadoController();
 const loginController = new LoginControllers();
-const agentesController = new AgentesController();
 const adsController = new AdsControllers();
 
 app.get('/login', loginController.index);
@@ -79,10 +74,6 @@ app.get('/logout', loginController.logout);
 
 // Rutas del website : Zona privada del usuario
 app.get('/privado', sessionAuthMiddleware, privadoController.index);
-
-app.get('/agentes-new', sessionAuthMiddleware, agentesController.new);
-app.post('/agentes-new', sessionAuthMiddleware, agentesController.postNewAgent);
-app.get('/agentes-delete/:agenteId', sessionAuthMiddleware, agentesController.deleteAgent)
 
 app.get('/ad-new', sessionAuthMiddleware, adsController.new); // Para mostrar la página de creación de anuncios
 app.post('/ad-new', sessionAuthMiddleware, upload.single('img'), adsController.postNewAd); // Para manejar la publicación de un nuevo anuncio
@@ -94,7 +85,6 @@ app.get('/ads-delete/:adId', sessionAuthMiddleware, adsController.deleteAd);
 app.use('/api-doc', swaggerMiddleware);
 app.use('/api/ads', adsRoutes);
 app.post('/api/authenticate', loginController.postJWT);
-app.use('/api/agentes', jwtAuthMiddleware, require('./routes/api/agentes'));
 
 // Manejo de errores 404
 app.use(function (req, res, next) {
