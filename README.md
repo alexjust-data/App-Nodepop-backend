@@ -27,16 +27,27 @@ npm start
 npm run dev 
 ```
 
+## Test
+
+```sh
+npx nodemon npx nodemon testThumbnailService.js
+
+Respuesta del servicio de thumbnails: 
+{
+  status: 'Completed',
+  thumbnailPath: '/Users/alex/Desktop/KEEPKODING/Practica/App-Nodepop-backend/public/img/thumbnails/test_thumbnail6.png'
+}
+```
+
+
 
 ### Exemples
 
-Admin 
+
 ```sh
-http://127.0.0.1:3000/admin
-# username : 'admin'
+# username : 'admin@example.com'
 # userpass : '1234'
 ```
-> only admin with privileges to add ads
 
 Paths
 ```sh
@@ -46,8 +57,6 @@ http://127.0.0.1:3000/?name=Bicicleta
 http://127.0.0.1:3000/?skip=2&limit=7
 # Sorting
 http://127.0.0.1:3000/?sort=-price%20name
-# Field Selection
-http://127.0.0.1:3000/?fields=name%20-_id%20option
 # Filters
 http://127.0.0.1:3000/?tags=lifestyle,motor
 http://127.0.0.1:3000/?venta=true
@@ -58,38 +67,30 @@ http://127.0.0.1:3000/?price=-100
 http://127.0.0.1:3000/?price=100
 
 ```
+
 Api
 
 ```sh
 # Api doc
 http://127.0.0.1:3000/api-doc
+
 # multiples gets by api
-http://127.0.0.1:3000/api/ads?tag=mobile&option=false&name=ip&price=50-&start=0&limit=2&sort=price
+http://127.0.0.1:3000/api/ads?name=prueba&option=true&tags=motor&img
 # res
 {
-  "results": [
-    {
-      "_id": "651d273960e534d500295730",
-      "name": "iPhone 3GS",
-      "option": false,
-      "price": 50,
-      "img": "2.png",
-      "tags": [
-        "lifestyle",
-        "mobile"
-      ],
-      "__v": 0
-    },
-    {
-      "_id": "651d273960e534d500295733",
-      "name": "iPad Pro",
-      "option": true,
-      "price": 799,
-      "img": "5.png",
-      "tags": [
-        "mobile"
-      ],
-      "__v": 0
+    "result": {
+        "_id": "659d2a6fbfda74c58f0dfbb7",
+        "name": "Vespino",
+        "option": true,
+        "price": 2,
+        "img": "img-1704798831210-1readme.png",
+        "tags": [
+            "lifestyle"
+        ],
+        "owner": {
+            "_id": "659d275e2203518b634d43cc",
+            "email": "admin@example.com"
+        },
+        "__v": 0
     }
-  ]
 }
