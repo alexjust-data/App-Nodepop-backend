@@ -4,6 +4,26 @@ const cote = require('cote');
 const requester = new cote.Requester({ name: 'Ad Controller Requester' });
 
 
+// Esta es la función que promisifica el proceso de generación de thumbnails
+function generateThumbnail(originalImagePath, thumbnailPath) {
+    return new Promise((resolve, reject) => {
+        requester.send({
+            type: 'generate-thumbnail',
+            originalImagePath: originalImagePath,
+            thumbnailPath: thumbnailPath
+        }, (err, response) => {
+            if (err) {
+                reject(err);
+            } else {
+                // Aquí solo devolvemos el nombre del archivo, no la ruta completa
+                resolve(path.basename(response.thumbnailPath));
+            }
+        });
+    });
+}
+
+
+
 class AdsController {
     new(req, res, next) {
       res.render('ad-new');
@@ -13,35 +33,38 @@ class AdsController {
         try {
             console.log('Datos del anuncio recibidos en postNewAd:', req.body); // Log de los datos recibidos
             console.log('Archivo recibido en postNewAd:', req.file); // Log del archivo recibido
-
-            const usuarioId = req.session.usuarioLogado;
+    
+            const usuarioId = req.session.usuarioLogado || req.usuarioLogadoAPI;
+            if (!usuarioId) {
+                console.error('No hay usuario logueado');
+                return res.status(401).send('Es necesario loguearse primero');
+            } else {
+                console.error('Usuario logueado, usuarioId: ', usuarioId);
+            }
             const { name, option, price, tags } = req.body;
-            const img = req.file.filename; // Asumiendo que 'img' es el nombre del campo en el formulario
-            const ad = new Ad({ name, option, price, tags, img, owner: usuarioId });
-            await ad.save();
-
-            // Enviar la ruta de la imagen al servicio de thumbnails
+            const img = req.file.filename; 
             const originalImagePath = path.join(__dirname, '..', 'public', 'img', img);
             const thumbnailPath = path.join(__dirname, '..', 'public', 'img', 'thumbnails', img);
+            // Esperamos a que el thumbnail sea generado
+            const generatedThumbnailPath = await generateThumbnail(originalImagePath, thumbnailPath);
+            console.error('Ruta generada desde generateThumbnail: ', generatedThumbnailPath);
+            
+            const ad = new Ad({ 
+                name, 
+                option, 
+                price, 
+                tags, 
+                img, 
+                thumbnail: generatedThumbnailPath,
+                owner: usuarioId });
 
-            console.log('Enviando mensaje a cote para generar thumbnail:', {
-                originalImagePath,
-                thumbnailPath
-            });
+            await ad.save();
 
-            requester.send({
-                type: 'generate-thumbnail',
-                originalImagePath: originalImagePath,
-                thumbnailPath: thumbnailPath
-            }, (err, res) => {
-                if (err) {
-                    console.error('Error recibido de cote:', err); // Log si hay un error en la respuesta de cote
-                  } else {
-                    console.log('Thumbnail generado:', response.thumbnailPath); // Log de la respuesta exitosa de cote
-                  }
-            });
-            console.log('Mensaje enviado a cote para generar thumbnail');
+            console.log('Rutas de imágenes:', { originalImagePath, 
+                                                  thumbnailPath }); // Imprimir las rutas de las imágenes
+    
 
+    
             res.redirect('/privado'); // lo mandamos a la lista de ads
         } catch (error) {
             console.error("Error al publicar un nuevo anuncio: ", error);
@@ -49,7 +72,6 @@ class AdsController {
             next(error);
         }
     }
-
 
 
     async deleteAd(req, res, next) {
@@ -83,6 +105,7 @@ class AdsController {
         }
     }
 }
+
 
 
 module.exports = AdsController;

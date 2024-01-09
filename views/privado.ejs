@@ -47,10 +47,16 @@
         <a href="/ad-new" class="btn btn-custom"><%= __('Create new ad') %></a>
 
     </div>
+
     <div class="cards-container">
         <% ads.forEach(ad => { %>
-            <div class="card">
-                <img src="/img/<%= ad.img %>" class="card-img" alt="<%= ad.name %>">
+            <div class="card-thumb">
+                <% if(ad.thumbnail) { %>
+                    <!-- Aquí se usa la ruta relativa correcta -->
+                    <img src="/img/thumbnails/<%= ad.thumbnail %>" class="card" alt="<%= ad.name %>">
+                <% } else { %>
+                    <img src="/img/<%= ad.img %>" class="card-img" alt="<%= ad.name %>">
+                <% } %>
                 <div class="card-body">
                     <h5 class="card-title"><%= ad.name %></h5>
                     <p class="card-text"><%= ad.option ? __('Sale') : __('Search') %>: <%= ad.price %> EUR</p>
@@ -62,6 +68,7 @@
             </div>
         <% }); %>
     </div>
+    
 </main>
 
 <script>
