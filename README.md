@@ -27,7 +27,7 @@ npm start
 npm run dev 
 ```
 
-## Test
+## Test microservice
 
 ```sh
 npx nodemon npx nodemon testThumbnailService.js
